@@ -6,7 +6,6 @@ import { openEditAtom, tasksAtom } from '../Atoms'
 import { useAtom } from 'jotai'
 import TaskSection from './TaskSection'
 import EditTask from './EditTask'
-import axios from 'axios'
 
 const MainTitle = styled.div`
   font-weight: bold;
@@ -82,6 +81,7 @@ export default function Index() {
 
   useEffect(() => {
     tasks.length === 0 && getData()
+    //eslint-disable-next-line
   }, [tasks])
 
   return (

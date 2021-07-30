@@ -3,9 +3,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import logo from '../../img/logo_test.png'
 import { Alert } from '@material-ui/lab'
-import { useAtom } from 'jotai'
-import { tasksAtom } from '../Atoms'
-import Axios from 'axios'
 
 const MainLogin = styled.div`
   background-color: #8383ff;
