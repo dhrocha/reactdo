@@ -7,7 +7,7 @@ const TaskTitle = styled.div`
 `
 
 const Container = styled.div`
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px solid #cccccc;
   border-left: 6px solid ${props => props.theme.color};
   padding: 10px;
@@ -17,6 +17,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin: 0px 6px 5px 0px;
+  min-height: 150px;
 
   :hover {
     box-shadow: 0 0 1em gray;

@@ -3,6 +3,7 @@ import React from 'react'
 import { tasksAtom } from '../Atoms'
 import styled from 'styled-components'
 import TaskItem from './TaskItem'
+import TaskPlus from './TaskPlus'
 
 const Container = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ export default function TaskSection() {
       {tasks.map(task => {
         return <TaskItem task={task} key={task.id} />
       })}
+      <TaskPlus />
     </Container>
   )
 }
