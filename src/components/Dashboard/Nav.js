@@ -25,7 +25,14 @@ export default function Nav() {
   return (
     <StyledNav>
       <Logo />
-      <Button variant='contained' color='primary' size='small'>
+      <Button
+        variant='contained'
+        color='primary'
+        size='small'
+        onClick={() => {
+          window.location = '/'
+        }}
+      >
         Sair
       </Button>
     </StyledNav>

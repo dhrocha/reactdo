@@ -41,12 +41,12 @@ export default function ResumeSection() {
   const [resumeItems, setResumeItems] = useState([])
 
   useEffect(() => {
-    const newTasks = tasks.filter(item => item.progress === 0, 0)
-    const openedTasks = tasks.filter(
+    const newTasks = tasks?.filter(item => item.progress === 0, 0)
+    const openedTasks = tasks?.filter(
       item => item.progress > 0 && item.progress !== 100,
       0
     )
-    const closedTasks = tasks.filter(item => item.progress === 100, 0)
+    const closedTasks = tasks?.filter(item => item.progress === 100, 0)
 
     const resumeTasks = items.map(item => {
       const getValue = () => {

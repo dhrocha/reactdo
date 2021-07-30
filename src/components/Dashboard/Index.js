@@ -6,6 +6,7 @@ import { openEditAtom, tasksAtom } from '../Atoms'
 import { useAtom } from 'jotai'
 import TaskSection from './TaskSection'
 import EditTask from './EditTask'
+import axios from 'axios'
 
 const MainTitle = styled.div`
   font-weight: bold;
@@ -27,13 +28,17 @@ export default function Index() {
   const [tasks, setTasks] = useAtom(tasksAtom)
   const [openEditDialog, setOpenEditDialog] = useAtom(openEditAtom)
 
-  useEffect(() => {
+  const getData = async () => {
+    //     const { data } = await axios.get(
+    //       'https://fitec-teste-frontend.free.beeceptor.com/api/dashboard'
+    //     )
+    // //    console.log(JSON.parse(data))
     setTasks([
       {
         id: 1,
         name: 'Breadcrumb',
         description: 'Criar um novo breadcrumb para a aplicação web',
-        progress: 100,
+        progress: 0,
         type: 1
       },
       {
@@ -73,8 +78,12 @@ export default function Index() {
         type: 2
       }
     ])
-    //eslint-disable-next-line
-  }, [])
+  }
+
+  useEffect(() => {
+    tasks.length === 0 && getData()
+  }, [tasks])
+
   return (
     <div>
       <Container>
