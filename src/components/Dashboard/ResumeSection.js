@@ -7,19 +7,22 @@ const items = [
     title: 'Novas Tarefas',
     subtitle: 'Total de tarefas',
     total: 0,
-    color: '#7775E7'
+    color: '#7775E7',
+    id: 1
   },
   {
     title: 'Tarefas em progresso',
     subtitle: 'Total de tarefas',
     total: 0,
-    color: '#FDCA49'
+    color: '#FDCA49',
+    id: 2
   },
   {
     title: 'Tarefas Concluidas',
     subtitle: 'Total de tarefas',
     total: 0,
-    color: '#F37C7C'
+    color: '#F37C7C',
+    id: 3
   },
   { title: 'Total de Tarefas', subtitle: '', total: 0, color: '#848484' }
 ]
@@ -35,7 +38,7 @@ export default function ResumeSection() {
   return (
     <Container>
       {items.map(item => {
-        return <ResumeItem item={item} />
+        return <ResumeItem item={item} key={item.id} />
       })}
     </Container>
   )

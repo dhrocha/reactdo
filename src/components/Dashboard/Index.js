@@ -4,6 +4,7 @@ import ResumeSection from './ResumeSection'
 import styled from 'styled-components'
 import { tasksAtom } from '../Atoms'
 import { useAtom } from 'jotai'
+import TaskSection from './TaskSection'
 
 const MainTitle = styled.div`
   font-weight: bold;
@@ -21,6 +22,7 @@ const MainTitleLight = styled.span`
 `
 
 export default function Index() {
+  //eslint-disable-next-line
   const [tasks, setTasks] = useAtom(tasksAtom)
   useEffect(() => {
     setTasks([
@@ -68,6 +70,7 @@ export default function Index() {
         type: 2
       }
     ])
+    //eslint-disable-next-line
   }, [])
   return (
     <div>
@@ -78,6 +81,7 @@ export default function Index() {
         <MainTitle>
           <MainTitleLight>Lista de </MainTitleLight>tarefas
         </MainTitle>
+        <TaskSection />
       </Container>
     </div>
   )

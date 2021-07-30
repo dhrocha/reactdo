@@ -6,7 +6,7 @@ import TaskItem from './TaskItem'
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   padding-left: 50px;
   padding-right: 50px;
 `
@@ -14,12 +14,10 @@ const Container = styled.div`
 export default function TaskSection() {
   const [tasks] = useAtom(tasksAtom)
 
-  console.log(tasks)
-
   return (
     <Container>
       {tasks.map(task => {
-        return <TaskItem task={task} />
+        return <TaskItem task={task} key={task.id} />
       })}
     </Container>
   )
