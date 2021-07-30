@@ -47,17 +47,17 @@ export default function EditTask({ open, setOpen }) {
 
   useEffect(() => {
     open.type === 'Nova' && setCurrentTask({})
-    setMessage('')
-    setError('')
     //eslint-disable-next-line
   }, [open])
 
+  useEffect(() => {
+    setMessage('')
+    setError('')
+  }, [])
+
   const handleChange = e => {
-    console.log(e.target)
     setError('')
     const { id, value, name } = e.target
-
-    console.log(value)
 
     id
       ? setCurrentTask({ ...currentTask, [id]: value })
@@ -65,11 +65,24 @@ export default function EditTask({ open, setOpen }) {
   }
 
   const handleSaveTask = () => {
-    console.log('editei')
+    const { progress } = currentTask
+
+    if (progress > 100) {
+      setError('O progresso deve ser um valor entre 0 e 100')
+      return false
+    }
+
+    const filtered = tasks.filter(t => t.id !== currentTask.id)
+    filtered.push({ ...currentTask, progress: parseInt(progress) })
+    const sorted = filtered.sort((a, b) => a.id - b.id)
+    setTasks(sorted)
+    setMessage('Tarefa atualizada!')
+    setInterval(() => {
+      setMessage('')
+    }, 2000)
   }
 
   const handleAddTask = () => {
-    console.log(currentTask)
     const { name, progress, description } = currentTask
 
     if (progress > 100) {
@@ -97,7 +110,6 @@ export default function EditTask({ open, setOpen }) {
       id: tasks.length + 1
     }
     arrayTasks.push(newCurrentTask)
-    console.log(arrayTasks)
     setTasks(arrayTasks)
 
     setMessage('Tarefa incluida!')
@@ -177,7 +189,7 @@ export default function EditTask({ open, setOpen }) {
           color='primary'
           variant='outlined'
           onClick={
-            open.typeDialog === 'Editar'
+            open.type === 'Editar'
               ? () => handleSaveTask()
               : () => handleAddTask()
           }

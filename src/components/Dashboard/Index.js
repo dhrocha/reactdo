@@ -33,7 +33,7 @@ export default function Index() {
         id: 1,
         name: 'Breadcrumb',
         description: 'Criar um novo breadcrumb para a aplicação web',
-        progress: 0,
+        progress: 100,
         type: 1
       },
       {

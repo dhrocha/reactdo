@@ -78,11 +78,13 @@ export default function TaskItem({ task }) {
   const [currentTask, setCurrentTask] = useAtom(currentTaskAtom)
   const { name, type, description, progress } = task
 
+  console.log(name, progress)
+
   const boxTheme = {
     color:
       progress === 0
         ? '#7775E7'
-        : progress > 0 || progress < 100
+        : progress > 0 && progress < 100
         ? '#FDCA49'
         : '#F37C7C'
   }
