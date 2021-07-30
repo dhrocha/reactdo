@@ -1,6 +1,8 @@
 import { Add } from '@material-ui/icons'
+import { useAtom } from 'jotai'
 import React from 'react'
 import styled from 'styled-components'
+import { openEditAtom } from '../Atoms'
 
 const Container = styled.div`
   border-radius: 5px;
@@ -22,8 +24,11 @@ const Container = styled.div`
 `
 
 export default function TaskPlus() {
+  //eslint-disable-next-line
+  const [openEditDialog, setOpenEditDialog] = useAtom(openEditAtom)
+
   return (
-    <Container>
+    <Container onClick={() => setOpenEditDialog({ type: 'Nova', open: true })}>
       <Add style={{ fontSize: '70px' }} />
     </Container>
   )

@@ -1,5 +1,7 @@
+import { useAtom } from 'jotai'
 import React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
+import { currentTaskAtom, openEditAtom } from '../Atoms'
 
 const TaskTitle = styled.div`
   font-weight: bold;
@@ -70,6 +72,10 @@ const SpanLabel = styled.div`
 `
 
 export default function TaskItem({ task }) {
+  //eslint-disable-next-line
+  const [openEditDialog, setOpenEditDialog] = useAtom(openEditAtom)
+  //eslint-disable-next-line
+  const [currentTask, setCurrentTask] = useAtom(currentTaskAtom)
   const { name, type, description, progress } = task
 
   const boxTheme = {
@@ -98,9 +104,14 @@ export default function TaskItem({ task }) {
     }
   }
 
+  const handleEdit = () => {
+    setCurrentTask(task)
+    setOpenEditDialog({ type: 'Editar', open: true })
+  }
+
   return (
     <ThemeProvider theme={boxTheme}>
-      <Container>
+      <Container onClick={handleEdit}>
         <TaskTitle>{name}</TaskTitle>
         <ThemeProvider theme={typeBadgeTheme}>
           <Badge>{getType()}</Badge>

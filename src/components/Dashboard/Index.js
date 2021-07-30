@@ -2,9 +2,10 @@ import React, { useEffect } from 'react'
 import Nav from './Nav'
 import ResumeSection from './ResumeSection'
 import styled from 'styled-components'
-import { tasksAtom } from '../Atoms'
+import { openEditAtom, tasksAtom } from '../Atoms'
 import { useAtom } from 'jotai'
 import TaskSection from './TaskSection'
+import EditTask from './EditTask'
 
 const MainTitle = styled.div`
   font-weight: bold;
@@ -24,6 +25,8 @@ const MainTitleLight = styled.span`
 export default function Index() {
   //eslint-disable-next-line
   const [tasks, setTasks] = useAtom(tasksAtom)
+  const [openEditDialog, setOpenEditDialog] = useAtom(openEditAtom)
+
   useEffect(() => {
     setTasks([
       {
@@ -82,6 +85,11 @@ export default function Index() {
           <MainTitleLight>Lista de </MainTitleLight>tarefas
         </MainTitle>
         <TaskSection />
+        <EditTask
+          open={openEditDialog}
+          setOpen={setOpenEditDialog}
+          typeDialog='Nova'
+        />
       </Container>
     </div>
   )
