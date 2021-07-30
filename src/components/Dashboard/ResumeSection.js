@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ResumeItem from './ResumeItem'
 import styled from 'styled-components'
+import { tasksAtom } from '../Atoms'
+import { useAtom } from 'jotai'
 
 const items = [
   {
@@ -35,9 +37,42 @@ const Container = styled.div`
 `
 
 export default function ResumeSection() {
+  const [tasks] = useAtom(tasksAtom)
+  const [resumeItems, setResumeItems] = useState([])
+
+  useEffect(() => {
+    const newTasks = tasks.filter(item => item.progress === 0, 0)
+    const openedTasks = tasks.filter(
+      item => item.progress > 0 && item.progress !== 100,
+      0
+    )
+    const closedTasks = tasks.filter(item => item.progress === 100, 0)
+
+    const resumeTasks = items.map(item => {
+      const getValue = () => {
+        switch (item.id) {
+          case 1:
+            return newTasks.length
+          case 2:
+            return openedTasks.length
+          case 3:
+            return closedTasks.length
+          default:
+            return tasks.length
+        }
+      }
+      return {
+        ...item,
+        total: getValue()
+      }
+    })
+
+    setResumeItems(resumeTasks)
+  }, [tasks])
+
   return (
     <Container>
-      {items.map(item => {
+      {resumeItems.map(item => {
         return <ResumeItem item={item} key={item.id} />
       })}
     </Container>
